@@ -1,0 +1,64 @@
+#language-select {
+    display: relative;
+
+    & > span {
+        display: flex;
+        align-items: center;
+        cursor: pointer;   
+        padding: 5px;
+        font-weight: bold;
+    }
+
+    & > span:hover {
+        color: red;
+    }
+
+    .cp-modal {
+        position: absolute;
+        right: 0px;
+        display: none;
+        background-color: rgb(255, 255, 255);
+        border-radius: 4px;
+        border: 1px  solid rgb(248, 250, 253);
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 15px;
+        width: 210px;
+        overflow: auto;
+        z-index: 1000;
+
+        &-flag {
+            margin-right: 10px;
+        }
+
+        .MuiInputBase-root {
+            height: 40px;
+        }
+
+        ul {
+            margin-top: 5px;
+            height: 300px;
+            overflow: auto;
+        }
+
+        li {
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        li:hover {
+            color: red;
+        }
+
+        &.dark {
+            background-color: #333333;
+        }
+    }  
+    .cp-modal.active {
+        display: block;
+    }
+}
+

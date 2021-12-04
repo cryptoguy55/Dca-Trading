@@ -1,0 +1,102 @@
+.MuiTableCell-root {
+    &.MuiTableCell-head {
+        opacity: 0.5;
+        font-size: 12px;
+        font-weight: 500;
+
+        span {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &.MuiTableCell-body {
+        font-size: 14px;
+
+        .error {
+            color: red
+        }
+    }
+}
+
+.sort-icon {
+    display: flex;
+    flex-direction: column;
+
+    &--down {
+        margin-top: -10px;
+    }
+}
+
+.invoice--table {
+    width: 100%;
+    display: none;
+
+    &.visible {
+        display: block;
+    }
+
+    // &--pagination {
+    //     justify-content: end;
+    //     display: flex;
+    //     align-items: center;
+    //     font-family: Poppins;
+    //     font-size: 12px;
+    //     font-weight: 500;
+    //     position: relative;
+
+    //     .left-page {
+    //         position: absolute;
+    //         right: 33px;
+    //     }
+    // }
+
+//     .MuiTableCell-root {
+//         border-bottom: 0.5px #EEE solid;
+//     }
+
+//     .MuiTablePagination-selectRoot {
+//         display: none
+//     }
+
+//     .MuiTablePagination-caption {
+//         display: none
+//     }
+
+//     .MuiTablePagination-actions {
+//         button {
+//             margin-left: 50px;
+//             font-size: 12px;
+//             font-weight: 500;
+//         }
+//     }
+
+//     a {
+//         color: black
+//     }
+// }
+
+// .table-placeholder {
+//     border-radius: 6px;
+//     border: solid 1px #eee;
+//     display: none;
+//     height: 300px;
+//     width: 100%;
+//     padding: 44px 30px 0px;
+
+//     &.visible {
+//         display: flex;
+//         text-align: center;
+//         align-items: center;
+//         flex-direction: column;
+//         border-bottom: 0.5px #EEE solid;
+//         border-top: 0.5px #EEE solid;
+//         color: #7f7f7f;
+//     }
+
+//     &--title {
+//         margin-bottom: 4px;
+//         font-size: 18px;
+//         font-weight: bold;
+//     }
+}
