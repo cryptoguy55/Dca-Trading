@@ -167,7 +167,7 @@ const Home = (props) => {
           result1.push( 
             parseFloat((sum * item[1]).toFixed(2))
           )
-          result2.push(new Date(item[0]).toDateString())
+          result2.push(new Date(item[0]).toISOString().split('T')[0])
         }
       })
       setData({
@@ -193,10 +193,10 @@ const Home = (props) => {
   return (
     <>
       { isLoading? <Spinner type={1} /> : ""}
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="flex items-center justify-around p-3">
           <EuroOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
-          <div>
+          <div className="w-44">
             &euro;{total.inverst}<br/>
             Total inversted 
           </div>
@@ -204,21 +204,24 @@ const Home = (props) => {
         </Card>
         <Card className="flex items-center justify-around p-3">
           <TimelineOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
-          <div>
-            &euro;{total.value}<br/>
-            {checked ? <span>{total.coin * 100000000} STAS</span> : <span>{total.coin} BTC</span> }<br />
-            Total Value
+          <div className="w-44 flex items-center justify-around">
+            <div>
+              &euro;{total.value}<br/>
+              {checked ? <span>{total.coin * 100000000} STAS</span> : <span>{total.coin} BTC</span> }<br />
+              Total Value
+            </div>
+            <Switch
+              checked={checked}
+              onChange={(e) => setChecked(e.target.checked)}
+              name="checkedA"
+            />
           </div>
-          <Switch
-            checked={checked}
-            onChange={(e) => setChecked(e.target.checked)}
-            name="checkedA"
-          />
+          
           <img src={IMG_bitcoin} width="50" height="50" />
         </Card>
         <Card className="flex items-center justify-around p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
-          <div>
+          <div className="w-44">
             {total.percent}%<br />
             Percent Change
           </div>
@@ -226,15 +229,15 @@ const Home = (props) => {
         </Card>
         <Card className="flex items-center justify-around p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
-          <div>
+          <div className="w-44">
             &euro;{total.up}<br />
             Result
           </div>
           <img src={IMG_bitcoin} width="50" height="50" />
         </Card>
       </div>
-      <div className="grid grid-cols-4 gap-8 mt-8">
-        <Card className="p-4">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-5 lg:grid-cols-4 gap-8 mt-8">
+        <Card className="p-4 md:col-span-2 lg:col-span-1">
           <span className="text-2xl">DCA Settings</span>
           <Divider />
           <fieldset>
@@ -312,13 +315,13 @@ const Home = (props) => {
             </FormGroup>
           </fieldset>
         </Card>
-        <Card className="col-span-3 p-4">
+        <Card className="md:col-span-3 p-4">
           <Line options={options} 
           data={data} />
         </Card>
       </div>
       <p className="my-8 text-3xl text-center">How to use the BTC DCA tool</p>
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-8">
         <Card className="p-4">
           <span className="text-2xl">How do I use this Bitcoin Investment Calculator?</span>
           <Divider />
