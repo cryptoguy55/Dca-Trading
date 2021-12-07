@@ -4,9 +4,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 import Spinner from './components/spinner'
 import reportWebVitals from './reportWebVitals';
-import './index.scss';
-import './i18n';
-
+import "./index.scss"
 const LazyApp = lazy(() => import("./App"))
 
 ReactDOM.render(

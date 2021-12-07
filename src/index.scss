@@ -21,6 +21,10 @@
 html, body, #root {
     height: 100%;
 }
+#box {
+    height: 100%;
+
+}
 .dark {
     background-color: #424242;
     color: white;
@@ -54,7 +58,7 @@ html, body, #root {
 }
 .page-content {
     min-height: calc(100vh - 355px);
-    padding: 40px
+    padding: 20px
 }
 @media (max-width: 1024px) {
     .login-panel {

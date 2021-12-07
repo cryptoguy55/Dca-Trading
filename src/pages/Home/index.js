@@ -32,38 +32,6 @@ ChartJS.register(
 );
 const options = {
   responsive: true,
-    // scales: {
-    //   x: {
-    //     display: true,
-    //     title: {
-    //       display: true,
-    //       text: 'Month',
-    //       color: '#911',
-    //       font: {
-    //         family: 'Comic Sans MS',
-    //         size: 20,
-    //         weight: 'bold',
-    //         lineHeight: 1.2,
-    //       },
-    //       padding: {top: 20, left: 0, right: 0, bottom: 0}
-    //     }
-    //   },
-    //   y: {
-    //     display: true,
-    //     title: {
-    //       display: true,
-    //       text: 'Value',
-    //       color: '#191',
-    //       font: {
-    //         family: 'Times',
-    //         size: 20,
-    //         style: 'normal',
-    //         lineHeight: 1.2
-    //       },
-    //       padding: {top: 30, left: 0, right: 0, bottom: 0}
-    //     }
-    //   }
-    // },
   plugins: {
     legend: {
       position: 'top',
@@ -77,7 +45,6 @@ const options = {
 };
 const CoinGeckoClient = new CoinGecko();
 
-//3. Make calls
 const fetchData = async () => {
   try {
     const result = await CoinGeckoClient.coins.fetchMarketChart('bitcoin', {
@@ -141,16 +108,6 @@ const Home = (props) => {
     start = today.setFullYear(today.getFullYear() - parseInt(setting.starting))
 
     end = today.setFullYear(today.getFullYear() + parseInt(setting.accumulate))
-    // if(setting.starting === 0) {
-
-    // } else {
-    //   start = today.setFullYear(today.getFullYear() - setting.starting)
-    // }
-    // if(setting.accumulate === 0) {
-
-    // } else {
-    //   end = start.setFullYear(start.getFullYear() + setting.accumulate)
-    // }
     if(coin.length >0 ) {
       console.log(coin.length)
       let index1, index2;
@@ -217,7 +174,7 @@ const Home = (props) => {
             />
           </div>
           
-          <img src={IMG_bitcoin} width="50" height="50" />
+          <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
         </Card>
         <Card className="flex items-center justify-around p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
@@ -225,7 +182,7 @@ const Home = (props) => {
             {total.percent}%<br />
             Percent Change
           </div>
-          <img src={IMG_bitcoin} width="50" height="50" />
+          <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
         </Card>
         <Card className="flex items-center justify-around p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
@@ -233,7 +190,7 @@ const Home = (props) => {
             &euro;{total.up}<br />
             Result
           </div>
-          <img src={IMG_bitcoin} width="50" height="50" />
+          <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
         </Card>
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-5 lg:grid-cols-4 gap-8 mt-8">

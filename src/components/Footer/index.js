@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div className="flex bg-black text-white" style={{padding: '10px 50px 10px 30px'}}>
         <div className="pt-4">
-            <img src={logo} width="100" />
+            <img src={logo} width="100" alt="logo" />
             dca.trading
         </div>
         <div className="pt-12 px-4">
