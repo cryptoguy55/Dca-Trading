@@ -7,8 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import CoinGecko from "coingecko-api";
 import Spinner from "components/spinner"
 import { FormGroup, Label, Input, InputGroup, InputGroupText } from 'reactstrap';
-import Switch from '@material-ui/core/Switch';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ToggleSwitch from "components/toggleSwitch"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -32,6 +31,13 @@ ChartJS.register(
 );
 const options = {
   responsive: true,
+  scales: {
+    y: {
+      grid: {
+        display: false       
+      }
+    }
+  },
   plugins: {
     legend: {
       position: 'top',
@@ -119,7 +125,7 @@ const Home = (props) => {
       let result1= [], result2= [], sum = 0, total_amount=0;
       result.forEach( (item, index) => {
         if((index % parseInt(setting.repeat)) === 0 ) {
-          total_amount += setting.amount
+          total_amount += parseFloat(setting.amount)
           sum += Math.round(setting.amount / item[1] * 100000000) / 100000000
           result1.push( 
             parseFloat((sum * item[1]).toFixed(2))
@@ -135,6 +141,7 @@ const Home = (props) => {
             data: result1,
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            lineTension: 0.5
           }
         ]
        })
@@ -164,14 +171,13 @@ const Home = (props) => {
           <div className="w-44 flex items-center justify-around">
             <div>
               &euro;{total.value}<br/>
-              {checked ? <span>{total.coin * 100000000} STAS</span> : <span>{total.coin} BTC</span> }<br />
+              {checked ? <span>{total.coin * 100000000} </span> : <span>{total.coin} </span> }<br />
               Total Value
             </div>
-            <Switch
+            <ToggleSwitch               
               checked={checked}
               onChange={(e) => setChecked(e.target.checked)}
-              name="checkedA"
-            />
+              name="checkedA"/>
           </div>
           
           <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
@@ -198,7 +204,7 @@ const Home = (props) => {
           <span className="text-2xl">DCA Settings</span>
           <Divider />
           <fieldset>
-            <FormGroup className="mb-2 me-sm-2">
+            <FormGroup>
             <Label
               className="me-sm-2"
               for="exampleEmail"
@@ -277,7 +283,7 @@ const Home = (props) => {
           data={data} />
         </Card>
       </div>
-      <p className="my-8 text-3xl text-center">How to use the BTC DCA tool</p>
+      <p className="my-8 text-3xl text-center" id="explaination">How to use the BTC DCA tool</p>
       <div className="grid grid-cols-1 md:grid-cols-3  gap-8">
         <Card className="p-4">
           <span className="text-2xl">How do I use this Bitcoin Investment Calculator?</span>

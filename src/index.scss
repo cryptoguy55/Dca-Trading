@@ -22,49 +22,167 @@ html, body, #root {
     height: 100%;
 }
 #box {
-    height: 100%;
-
+  min-height: 100%;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:hover { 
+    color: red;
+  }
 }
 .dark {
-    background-color: #424242;
+    background-color: #424242; 
     color: white;
 }
 #box.dark {
     background-color: #333333;
     color: white;
 }
-.login-panel {
-    width: 1000px;
-    margin: 50px auto;
-    border-radius: 8px;
-    box-shadow: grey 5px 5px 5px;
-    border: #e5e7eb;
+.toggle-switch {
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 90px;
+      height: 34px;
+    }
+    
+    .switch input {display:none;}
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ca2222;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2ab934;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(55px);
+      -ms-transform: translateX(55px);
+      transform: translateX(55px);
+    }
+    
+    /*------ ADDED CSS ---------*/
+    .on
+    {
+      display: none;
+    }
+    
+    .on, .off
+    {
+      color: white;
+      position: absolute;
+      transform: translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
+      font-size: 10px;
+      font-family: Verdana, sans-serif;
+    }
+    
+    input:checked+ .slider .on
+    {display: block;}
+    
+    input:checked + .slider .off
+    {display: none;}
+    
+    /*--------- END --------*/
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;}
+  }
+  .nav-bar {
+    display: flex;
+    align-items: flex-end;
 
-    .image {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 30px;
-        background-color: black;
+    a {
+        font-weight: bold;
+        padding-left: 20px;
+        color: black !important;
+    }
+    &.dark a {
+      color: white;
     }
 
-    &-content {
-        display: flex;
-        padding: 30px 70px 10px;
-        flex-direction: column;
-        border: #e5e7eb 1px solid;
+    a:hover {
+        color: red !important;
     }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      & > span {
+          display: flex;
+          cursor: pointer;
+          padding-right: 20px;
+          font-weight: bold;
+      }
+      & > span:hover {
+        color: red;
+      }
+  
+      &-content {
+          display: none;
+          position: absolute;
+          left: 0px;
+          min-width: 300px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 999;
+          flex-direction: column;
+          background-color: white;
+          
+          a {
+              padding: 12px; 
+              color: black;
+              text-decoration: none;
+          }
+  
+          a:hover {
+              color: red;
+          }
+      }
+      &-content.dark {
+        background-color: #333333; 
+        color: white;
+        a {
+          color: white;
+        }
+        a:hover {
+          color: red;
+        }
+      }
+      &:hover .dropdown-content {display: flex;}
+  }
 }
 .page-content {
-    min-height: calc(100vh - 355px);
-    padding: 20px
+  min-height: calc(100vh - 160px);  
 }
-@media (max-width: 1024px) {
-    .login-panel {
-        max-width: 500px;
-        .image {
-            display: none;
-        }
-    } 
-  }
