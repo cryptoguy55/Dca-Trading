@@ -95,6 +95,7 @@ const fetchData = async () => {
 }
 const Home = (props) => {
   const { path } = useRouteMatch();
+  const [ publish, setPublish ] = useState("")
   const [ coin, setCoin ] = useState([])
   const [ checked, setChecked ] = useState(1)
   const [ isLoading, setIsLoading ] = useState(1)
@@ -151,11 +152,9 @@ const Home = (props) => {
 
     end = today.setFullYear(today.getFullYear() + parseInt(setting.accumulate))
     if(coin.length >0 ) {
-      console.log(coin.length)
       let index1, index2;
       index1 = coin.findIndex( item => item[0] > start )
       index2 = coin.findIndex( item => item[0] > end )
-      console.log(index1 + "-" + index2)
       let result = coin.slice(index1, index2)
       let result1= [], result2= [], sum = 0, total_amount=0;
       result.forEach( (item, index) => {
@@ -180,13 +179,15 @@ const Home = (props) => {
           }
         ]
        })
-       setTotal({
+      let k = {
          inverst: total_amount.toFixed(2),
          coin: parseFloat(sum.toFixed(5)),
          value: result1[result1.length-1].toFixed(2),
          up: (result1[result1.length-1] - total_amount).toFixed(2),
          percent: ((result1[result1.length-1] - total_amount) / total_amount * 100).toFixed(2)
-       })
+       }
+       setTotal({...k})
+       setPublish(`Wow! Buying ${setting.amount} EUR of Bitcoin ${text[setting.repeat]} for ${setting.accumulate} years starting ${setting.starting} years ago would have turned ${k.inverst} EUR into ${k.value} EUR (${k.percent}%)`)
     }
   }, [setting, isLoading])
   return (
@@ -317,7 +318,7 @@ const Home = (props) => {
       <Card className="mt-8 p-4">
         <span className="text-2xl"> What is Dollar Cost Averaging Bitcoin?</span>
         <Divider />
-        <Input placeholder={`Wow! Buying ${setting.amount} EUR of Bitcoin ${text[setting.repeat]} for ${setting.accumulate} years starting ${setting.starting} years ago would have turned ${total.inverst} EUR into ${total.value} EUR (${total.percent}%)`} />
+        <Input value={publish} onChange={(e) => setPublish(e.target.value)} />
       </Card>
       <p className="my-8 text-3xl text-center" id="explaination">How to use the BTC DCA tool</p>
       <div className="grid grid-cols-1 md:grid-cols-3  gap-8">
