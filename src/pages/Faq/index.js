@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
 import Accordion from '@material-ui/core/Accordion';
@@ -7,7 +7,9 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function Footer() {
-
+  useEffect(()=> {
+    window.scrollTo(0, 0);
+  }, [])
   return (
     <Card className="mt-8 p-4">
       <span className="text-2xl text-center"> FAQ </span>

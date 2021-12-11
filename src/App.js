@@ -41,6 +41,7 @@ const App = (props) => {
                   <Route path="/faq" component={Faq}/>
                   <Route path="/privacy_policy" component={PrivacyPolicy}/>
                   <Route path="/terms_of_service" component={TermsOfService}/>
+                  <Route exact path="/scroll" component={Home}/>
                 </div>         
                 <Footer />
              </Route>     

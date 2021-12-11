@@ -8,7 +8,7 @@ export default function ToggleSwitch({name, onChange, checked}) {
         <input type="checkbox" id="togBtn" name={name} checked={checked} onChange={onChange} />
         <div className="slider round">
         <span className="on">SAT</span>
-        <span class="off">BTC</span>
+        <span className="off">BTC</span>
         </div>
       </label>
    </span>

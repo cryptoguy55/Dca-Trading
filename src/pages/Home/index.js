@@ -9,6 +9,9 @@ import Spinner from "components/spinner"
 import { FormGroup, Label, Input, InputGroup, InputGroupText } from 'reactstrap';
 import ToggleSwitch from "components/toggleSwitch"
 import {
+  useRouteMatch
+} from "react-router-dom";
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -29,13 +32,41 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const text = {
+  "1": "every day",
+  "7": "every week",
+  "14": "every two weeks",
+  "30": "every momth",
+}
 const options = {
   responsive: true,
+  maintainAspectRatio: false,
   scales: {
     y: {
       grid: {
         display: false       
-      }
+      },
+      ticks: {
+        // For a category axis, the val is the index so the lookup via getLabelForValue is needed
+        // callback: function(val, index) {
+        //   // Hide every 2nd tick label
+        //   return  Number(val).toFixed(0).replace(',','') ;
+        // },
+        maxRotation: 0,
+        minRotation: 0
+    },
+  },
+    x: {
+      ticks: {
+        callback: function(val, index) {
+          let d = new Date(this.getLabelForValue(val))
+          return   monthNames[d.getMonth()] + " " + d.getFullYear(); 
+        },
+        maxRotation: 0,
+        minRotation: 0,
+        paddingRight: 20 
+    }
     }
   },
   plugins: {
@@ -54,7 +85,7 @@ const CoinGeckoClient = new CoinGecko();
 const fetchData = async () => {
   try {
     const result = await CoinGeckoClient.coins.fetchMarketChart('bitcoin', {
-      vs_currency: 'usd',
+      vs_currency: 'eur',
       days: 'max'
     });
     return result;
@@ -62,8 +93,8 @@ const fetchData = async () => {
     return [];
   }
 }
-
 const Home = (props) => {
+  const { path } = useRouteMatch();
   const [ coin, setCoin ] = useState([])
   const [ checked, setChecked ] = useState(1)
   const [ isLoading, setIsLoading ] = useState(1)
@@ -98,6 +129,11 @@ const Home = (props) => {
     changeValue(e.target.name, e.target.value);
   };
   useEffect(async () => {
+    if(path == "/") {
+      window.scrollTo(0, 0);
+    } else {
+      document.getElementById("explaination").scrollIntoView(true)
+    }
     let k = [];
     do {
       k = await fetchData()
@@ -121,7 +157,6 @@ const Home = (props) => {
       index2 = coin.findIndex( item => item[0] > end )
       console.log(index1 + "-" + index2)
       let result = coin.slice(index1, index2)
-      console.log(result)
       let result1= [], result2= [], sum = 0, total_amount=0;
       result.forEach( (item, index) => {
         if((index % parseInt(setting.repeat)) === 0 ) {
@@ -158,20 +193,19 @@ const Home = (props) => {
     <>
       { isLoading? <Spinner type={1} /> : ""}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="flex items-center justify-around p-3">
-          <EuroOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
+        <Card className="flex items-center p-3">
+          <EuroOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
             &euro;{total.inverst}<br/>
             Total inversted 
           </div>
-          <img src={IMG_bitcoin} width="50" height="50" />
         </Card>
-        <Card className="flex items-center justify-around p-3">
-          <TimelineOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
-          <div className="w-44 flex items-center justify-around">
+        <Card className="flex items-center p-3">
+          <TimelineOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
+          <div className="w-48 flex items-center justify-between">
             <div>
               &euro;{total.value}<br/>
-              {checked ? <span>{total.coin * 100000000} </span> : <span>{total.coin} </span> }<br />
+              {checked ? <span>{Math.round(total.coin * 100000000)} </span> : <span>{total.coin} </span> }<br />
               Total Value
             </div>
             <ToggleSwitch               
@@ -179,27 +213,23 @@ const Home = (props) => {
               onChange={(e) => setChecked(e.target.checked)}
               name="checkedA"/>
           </div>
-          
-          <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
         </Card>
-        <Card className="flex items-center justify-around p-3">
-          <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
+        <Card className="flex items-center p-3">
+          <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
             {total.percent}%<br />
             Percent Change
           </div>
-          <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
         </Card>
-        <Card className="flex items-center justify-around p-3">
-          <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green'}}/>
+        <Card className="flex items-center p-3">
+          <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
             &euro;{total.up}<br />
             Result
           </div>
-          <img src={IMG_bitcoin} width="50" height="50" alt="bitcoin"/>
         </Card>
       </div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-5 lg:grid-cols-4 gap-8 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-8 mt-8">
         <Card className="p-4 md:col-span-2 lg:col-span-1">
           <span className="text-2xl">DCA Settings</span>
           <Divider />
@@ -279,10 +309,16 @@ const Home = (props) => {
           </fieldset>
         </Card>
         <Card className="md:col-span-3 p-4">
-          <Line options={options} 
-          data={data} />
+          <Line options={options} height="400"
+          data={data} 
+          />
         </Card>
       </div>
+      <Card className="mt-8 p-4">
+        <span className="text-2xl"> What is Dollar Cost Averaging Bitcoin?</span>
+        <Divider />
+        <Input placeholder={`Wow! Buying ${setting.amount} EUR of Bitcoin ${text[setting.repeat]} for ${setting.accumulate} years starting ${setting.starting} years ago would have turned ${total.inverst} EUR into ${total.value} EUR (${total.percent}%)`} />
+      </Card>
       <p className="my-8 text-3xl text-center" id="explaination">How to use the BTC DCA tool</p>
       <div className="grid grid-cols-1 md:grid-cols-3  gap-8">
         <Card className="p-4">

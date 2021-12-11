@@ -20,8 +20,8 @@ const Header = (props) => {
         <Link to="/">Home</Link>
         <div className="dropdown mr-3">
           <span className="dropbtn">Guide &#11167;</span>
-          <div className={`dropdown-content ${theme ? "" : "dark"}`}>
-            <a href="#" onClick={(evt)=> { evt.preventDefault(); document.getElementById("explaination").scrollIntoView(true)}}>Who does the DCA tool work?</a>
+          <div className={`dropdown-content right-0 sm:left-0 ${theme ? "" : "dark"}`}>
+            <Link to="/scroll">Who does the DCA tool work?</Link>
             <Link to="/who_to_dca">Who to DCA?</Link> 
             <Link to="/about">About DCA.trading</Link>
           </div>                  
