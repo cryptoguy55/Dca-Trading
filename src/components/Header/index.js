@@ -20,7 +20,7 @@ const Header = (props) => {
         <a href="/">{ theme ? <img src={logo} width="130" alt="logo" /> :<img src={logo_white} width="130" alt="logo" /> }</a>
         <div className="dropdown mr-3">
           <span className="dropbtn" onClick={() => dispatch({type: "CHANGE_DROP", payload: !drop})}>Guide &#11167;</span>
-          <div className={`dropdown-content right-0 sm:left-0 ${theme ? "" : "dark"} ${drop ? "show" : ""}`}>
+          <div className={`dropdown-content sm:left-0 ${theme ? "" : "dark"} ${drop ? "show" : ""}`}>
             <Link to="/scroll">Who does the DCA tool work?</Link>
             <Link to="/who_to_dca">Who to DCA?</Link> 
             <Link to="/about">About DCA.trading</Link>

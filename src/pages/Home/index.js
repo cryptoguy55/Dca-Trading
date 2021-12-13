@@ -218,7 +218,7 @@ const Home = (props) => {
         <Card className="flex items-center p-3">
           <EuroOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
-            &euro;{new Intl.NumberFormat('en-IN').format(total.inverst)}<br/>
+            &euro;{new Intl.NumberFormat('de-DE').format(total.inverst)}<br/>
             Total inversted 
           </div>
         </Card>
@@ -226,8 +226,8 @@ const Home = (props) => {
           <TimelineOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div  className="flex items-center justify-between">
             <div className="w-20">
-              &euro;{new Intl.NumberFormat('en-IN').format(total.value)}<br/>
-              {checked ? <span>{new Intl.NumberFormat('en-IN').format(Math.round(total.coin * 100000000))} </span> : <span>{new Intl.NumberFormat('en-IN').format(total.coin)} </span> }<br />
+              &euro;{new Intl.NumberFormat('de-DE').format(total.value)}<br/>
+              {checked ? <span>{new Intl.NumberFormat('de-DE').format(Math.round(total.coin * 100000000))} </span> : <span>{new Intl.NumberFormat('de-DE').format(total.coin)} </span> }<br />
               Total Value
             </div>
             <ToggleSwitch               
@@ -239,14 +239,14 @@ const Home = (props) => {
         <Card className="flex items-center p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
-            {new Intl.NumberFormat('en-IN').format(total.percent)}%<br />
+            {new Intl.NumberFormat('de-DE').format(total.percent)}%<br />
             Percent Change
           </div>
         </Card>
         <Card className="flex items-center p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
-            &euro;{new Intl.NumberFormat('en-IN').format(total.up)}<br />
+            &euro;{new Intl.NumberFormat('de-DE').format(total.up)}<br />
             Result
           </div>
         </Card>
