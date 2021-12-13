@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
+import { useDispatch } from 'react-redux';
 
 export default function Footer() {
+  const dispatch = useDispatch()
   useEffect(()=> {
     window.scrollTo(0, 0);
+    dispatch({type: "CHANGE_DROP", payload: false})
   }, [])
   return (
     <Card className="mt-8 p-4">

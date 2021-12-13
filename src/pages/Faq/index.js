@@ -5,10 +5,13 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useDispatch } from 'react-redux';
 
 export default function Footer() {
+  const dispatch = useDispatch()
   useEffect(()=> {
     window.scrollTo(0, 0);
+    dispatch({type: "CHANGE_DROP", payload: false})
   }, [])
   return (
     <Card className="mt-8 p-4">

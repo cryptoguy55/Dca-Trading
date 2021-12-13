@@ -8,6 +8,7 @@ import CoinGecko from "coingecko-api";
 import Spinner from "components/spinner"
 import { FormGroup, Label, Input, InputGroup, InputGroupText } from 'reactstrap';
 import ToggleSwitch from "components/toggleSwitch"
+import { useDispatch } from 'react-redux';
 import {
   useRouteMatch
 } from "react-router-dom";
@@ -94,6 +95,7 @@ const fetchData = async () => {
   }
 }
 const Home = (props) => {
+  const dispatch = useDispatch()
   const { path } = useRouteMatch();
   const [ publish, setPublish ] = useState("")
   const [ coin, setCoin ] = useState([])
@@ -123,13 +125,18 @@ const Home = (props) => {
     accumulate: 1,
     starting: 1
   })
-  const changeValue = (name, item) => {  
-      setSetting({...setting, [name]: item});
+  const changeValue = (name, item) => {
+      if(name == "amount") {
+        setSetting({...setting, [name]: item.split(".")[0]});
+      }  else {
+        setSetting({...setting, [name]: item});
+      }
   };
   const handlechange = (e) => {
     changeValue(e.target.name, e.target.value);
   };
   useEffect(async () => {
+    dispatch({type: "CHANGE_DROP", payload: false})
     if(path == "/") {
       window.scrollTo(0, 0);
     } else {
@@ -203,15 +210,15 @@ const Home = (props) => {
         </Card>
         <Card className="flex items-center p-3">
           <TimelineOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
-          <div className="w-48 flex items-center justify-between">
-            <div>
+          <div  className="flex items-center justify-between">
+            <div className="w-20">
               &euro;{total.value}<br/>
               {checked ? <span>{Math.round(total.coin * 100000000)} </span> : <span>{total.coin} </span> }<br />
               Total Value
             </div>
             <ToggleSwitch               
               checked={checked}
-              onChange={(e) => setChecked(e.target.checked)}
+              onChange={setChecked}
               name="checkedA"/>
           </div>
         </Card>

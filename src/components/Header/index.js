@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
@@ -12,6 +12,7 @@ import {
 
 const Header = (props) => {
   const theme = useSelector((state) => state.common.theme)
+  const drop = useSelector((state) => state.common.drop)
   const dispatch = useDispatch()
   return (
     <>
@@ -19,8 +20,8 @@ const Header = (props) => {
         <Link to="/">{ theme ? <img src={logo} width="130" alt="logo" /> :<img src={logo_white} width="130" alt="logo" /> }</Link>
         <Link to="/">Home</Link>
         <div className="dropdown mr-3">
-          <span className="dropbtn">Guide &#11167;</span>
-          <div className={`dropdown-content right-0 sm:left-0 ${theme ? "" : "dark"}`}>
+          <span className="dropbtn" onClick={() => dispatch({type: "CHANGE_DROP", payload: !drop})}>Guide &#11167;</span>
+          <div className={`dropdown-content right-0 sm:left-0 ${theme ? "" : "dark"} ${drop ? "show" : ""}`}>
             <Link to="/scroll">Who does the DCA tool work?</Link>
             <Link to="/who_to_dca">Who to DCA?</Link> 
             <Link to="/about">About DCA.trading</Link>
