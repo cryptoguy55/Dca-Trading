@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
@@ -10,7 +10,8 @@ import {
   Link
 } from "react-router-dom";
 
-const Header = (props) => {
+const Header = (props) => { 
+
   const theme = useSelector((state) => state.common.theme)
   const drop = useSelector((state) => state.common.drop)
   const dispatch = useDispatch()
