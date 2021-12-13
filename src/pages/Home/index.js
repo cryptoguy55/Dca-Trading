@@ -55,10 +55,14 @@ const options = {
           return  Number(val).toFixed(0).replace(',','') ;
         },
         maxRotation: 0,
-        minRotation: 0
+        minRotation: 0,
+        color: '#b0b2b5' 
     },
   },
     x: {
+      grid: {
+        color: '#b0b2b5'
+      },
       ticks: {
         callback: function(val, index) {
           let d = new Date(this.getLabelForValue(val))
@@ -66,7 +70,8 @@ const options = {
         },
         maxRotation: 0,
         minRotation: 0,
-        paddingRight: 20 
+        paddingRight: 20,
+        color: '#b0b2b5' 
     }
     }
   },
@@ -76,6 +81,7 @@ const options = {
       display: false
     },
     title: {
+      color: "#b0b2b5",
       display: true,
       text: 'Portfolio Value Over Time - By DCA.trading',
     }
