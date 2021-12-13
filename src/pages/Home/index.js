@@ -46,7 +46,8 @@ const options = {
   scales: {
     y: {
       grid: {
-        display: false       
+        // display: false,
+        color: (line) => (line.index === 0 ? '#b0b2b5' : 'rgba(0, 0, 0, 0)')
       },
       ticks: {
         // For a category axis, the val is the index so the lookup via getLabelForValue is needed
@@ -71,14 +72,21 @@ const options = {
         maxRotation: 0,
         minRotation: 0,
         paddingRight: 20,
-        color: '#b0b2b5' 
+        color: '#b0b2b5'
     }
     }
   },
   plugins: {
     legend: {
       position: 'top',
-      display: false
+      display: false,
+      labels: {
+        // This more specific font property overrides the global property
+        font: {
+            size: 14,
+            weight: "bold"
+        }
+    }
     },
     title: {
       color: "#b0b2b5",
@@ -210,7 +218,7 @@ const Home = (props) => {
         <Card className="flex items-center p-3">
           <EuroOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
-            &euro;{total.inverst}<br/>
+            &euro;{new Intl.NumberFormat('en-IN').format(total.inverst)}<br/>
             Total inversted 
           </div>
         </Card>
@@ -218,8 +226,8 @@ const Home = (props) => {
           <TimelineOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div  className="flex items-center justify-between">
             <div className="w-20">
-              &euro;{total.value}<br/>
-              {checked ? <span>{Math.round(total.coin * 100000000)} </span> : <span>{total.coin} </span> }<br />
+              &euro;{new Intl.NumberFormat('en-IN').format(total.value)}<br/>
+              {checked ? <span>{new Intl.NumberFormat('en-IN').format(Math.round(total.coin * 100000000))} </span> : <span>{new Intl.NumberFormat('en-IN').format(total.coin)} </span> }<br />
               Total Value
             </div>
             <ToggleSwitch               
@@ -231,14 +239,14 @@ const Home = (props) => {
         <Card className="flex items-center p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
-            {total.percent}%<br />
+            {new Intl.NumberFormat('en-IN').format(total.percent)}%<br />
             Percent Change
           </div>
         </Card>
         <Card className="flex items-center p-3">
           <ImportExportOutlinedIcon style={{fontSize: '40px', color: 'green', marginRight: '20px'}}/>
           <div className="w-44">
-            &euro;{total.up}<br />
+            &euro;{new Intl.NumberFormat('en-IN').format(total.up)}<br />
             Result
           </div>
         </Card>

@@ -17,8 +17,7 @@ const Header = (props) => {
   return (
     <>
       <div className={`border-b flex px-8 py-4 nav-bar ${theme ? "" : "dark"}`}>
-        <Link to="/">{ theme ? <img src={logo} width="130" alt="logo" /> :<img src={logo_white} width="130" alt="logo" /> }</Link>
-        <Link to="/">Home</Link>
+        <a href="/">{ theme ? <img src={logo} width="130" alt="logo" /> :<img src={logo_white} width="130" alt="logo" /> }</a>
         <div className="dropdown mr-3">
           <span className="dropbtn" onClick={() => dispatch({type: "CHANGE_DROP", payload: !drop})}>Guide &#11167;</span>
           <div className={`dropdown-content right-0 sm:left-0 ${theme ? "" : "dark"} ${drop ? "show" : ""}`}>
